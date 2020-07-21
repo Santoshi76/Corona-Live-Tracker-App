@@ -1,0 +1,75 @@
+<div id="ParentContainer">
+<div id="sidebar">
+<div *ngIf="this.countryArray">
+
+<ul *ngFor="let data of this.countryArray[0] | keyvalue; let i = index;" class="countries" >
+  <li [ngClass]="{'highlight': selectedIndex === i}" (click)="getDataByCountry(data.value.code,i)">{{data.value.title}}</li>
+</ul>
+</div>
+</div>
+  
+<div id="main">
+        <div>
+				
+        <!-- World Count -->
+  <!-- <div  class="grid grid-pad moduler countries" > -->
+  <div class="moduler countries row-1-4 content_World" >Total Infected: {{total_infect}}</div>
+  <div class="moduler countries row-1-4 content_World" >Total Recovered {{total_recover}}</div>
+  <div class="moduler countries row-1-4 content_World" >Active Cases: {{total_active_cases}}</div>
+   <div class="moduler countries row-1-4 content_World">Death in % {{total_death_per |number : '.2-2'}}</div>
+  <!-- </div> -->
+    <!-- World Count ENd -->
+        </div>
+        <div *ngIf="this.countryData && this.countryData.countrydata" class="logo" id="flex-container">
+				<!-- Country Detail Count -->
+    <!-- <div *ngIf="this.countryData && this.countryData.countrydata"> -->
+  <div  class="grid grid-pad moduler countries" class="row" id="child-container">
+  <div class="moduler countries row-1-4 content" >Total Infected: {{this.countryData.countrydata[0].total_cases}}</div>
+  <div class="moduler countries row-1-4 content" >Total Recovered: {{this.countryData.countrydata[0].total_recovered}}</div>
+  <div class="moduler countries row-1-4 content" >Active Cases: {{this.countryData.countrydata[0].total_active_cases}}</div>
+   <div class="moduler countries row-1-4 content" >Death in %: {{this.perDeath| number : '.2-2'}}</div>
+  </div>
+      <div class="scroll-table-container">
+          <table class="scroll-table">
+   <thead>
+     <tr>
+       <th scope="col">Date</th>
+       <th scope="col">new_daily_case</th>
+       <th scope="col">new_daily_death</th>
+       <th scope="col">total_case</th>
+	      <th scope="col">total_recoveries</th>
+	    <th scope="col">total_death</th>
+     </tr>
+   </thead>
+   <tbody *ngFor="let date of this.countryTimelineArray | keyvalue | reverse | slice:1; let l = count">
+         <tr *ngIf="l > 1"> 
+       	<td >{{date.key}}</td>
+				<td >{{date.value.new_daily_cases}}</td>
+				<td >{{date.value.new_daily_deaths}}</td>
+				<td >{{date.value.total_cases}}</td>
+				<td >{{date.value.total_recoveries}}</td>
+				<td >{{date.value.total_deaths}}</td>
+        </tr>
+         <tr *ngIf="l === 1"> 
+       	<td>No Data Found</td>
+         </tr>
+        </table>
+      </div>
+      <!-- </div> -->
+      <!-- </div> -->
+<!-- Country Detail Count End -->
+        </div>
+
+
+</div>
+
+</div>
+<!-- End -->
+
+
+
+
+
+
+
+
